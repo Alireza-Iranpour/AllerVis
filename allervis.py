@@ -67,6 +67,12 @@ app.layout = html.Div([
     html.Div([
         html.Div(
             [
+            html.Div([
+                html.P("AllerVis", className="control_label"),
+                ],
+                style={'margin': '0px, 10px', 'font-size': '30px',
+                       "font-family": "Helvetica", "font-weight": "bold"}
+            ),
                 html.P("Filter by allergen:", className="control_label"),
                 html.Div([
                         dcc.RadioItems(
