@@ -68,16 +68,19 @@ app.layout = html.Div([
         html.Div(
             [
                 html.P("Filter by allergen:", className="control_label"),
-                dcc.RadioItems(
-                    id="allergen_selector",
-                    options=[
-                        {"label": "All ", "value": "all"},
-                        {"label": "Customize ", "value": "custom"},
-                    ],
-                    value="active",
-                    labelStyle={"display": "inline-block"},
-                    className="dcc_control",
-                ),
+                html.Div([
+                        dcc.RadioItems(
+                            id="allergen_selector",
+                            options=[
+                                {"label": "All ", "value": "all"},
+                                {"label": "Customize ", "value": "custom"},
+                            ],
+                            value="active",
+                            labelStyle={"display": "inline-block"},
+                            className="dcc_control",
+                        ),
+                            ],
+                        style={'margin': '10px'}),
                 dcc.Dropdown(
                     id="allergens",
                     options=allergen_options,
@@ -88,6 +91,24 @@ app.layout = html.Div([
             ],
             className="pretty_container four columns",
             id="cross-filter-options",
+            style={"width": "38%", "padding": 10, "margin": "5px", "background-color": "#f9f9f9",
+                   'display': 'inline-block', 'vertical-align': 'top', 'height': '1000',
+                   'position': 'relative',
+                   "box-shadow": "0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 6px 20px 0 rgba(0, 0, 0, 0.05)",
+                   "font-family": "Helvetica"},
+        ),
+
+        html.Div(
+            [
+                html.Div(
+                    [dcc.Graph(id="map_graph")],
+                    id="map_container",
+                    className="pretty_container",
+                ),
+            ],
+            id="map_area",
+            className="eight columns",
+            style={"margin": "5px", "width": "58%", 'display': 'inline-block', 'position': 'relative'}
         ),
 
         html.Div(
@@ -100,6 +121,7 @@ app.layout = html.Div([
             ],
             id="stack_barchart_area",
             className="eight columns",
+            style={"margin": "5px"}
         ),
     ],
         className="row flex-display",
@@ -107,7 +129,7 @@ app.layout = html.Div([
 
 ],
     id="mainContainer",
-    style={"display": "flex", "flex-direction": "column"},
+    style={"padding": 10, "background-color": "#f2f2f2"},
 )
 
 
@@ -131,8 +153,61 @@ def update_plot(selected_allergens):
     ascending = True
     concatenated['selected_set'] = concatenated.apply(lambda row: row[selected_allergens].sum(), axis=1)
     concatenated.sort_values('selected_set', ascending=ascending, inplace=True)
-    fig = px.bar(concatenated, x='Entity', y=selected_allergens, title="Rankings", orientation='v', height=500)
+    fig = px.bar(concatenated, x='Entity', y=selected_allergens, orientation='v', height=500)
+
+    fig.update_layout(
+        legend=dict(
+            orientation="h",
+            yanchor="bottom",
+            y=1.02,
+            xanchor="right",
+            x=1
+        ),
+        margin=dict(
+            l=10,
+            r=10,
+            b=20,
+            t=20,
+            pad=4
+        ),
+    )
+
+    fig.update_yaxes(title=None)
+    fig.update_xaxes(title=None)
+
     return fig
+
+
+@app.callback(
+    Output("map_graph", "figure"), [Input("allergens", "value")]
+)
+def update_plot(selected_allergens):
+    concatenated['selected_set'] = concatenated.apply(lambda row: row[selected_allergens].sum(), axis=1)
+    fig = px.choropleth(concatenated,
+                        locations='Code',
+                        color='selected_set',
+                        hover_name="Entity",  # column to add to hover information
+                        # color_continuous_scale=px.colors.sequential.Blues,
+                        color_continuous_scale=px.colors.diverging.RdYlGn_r,
+                        # color_continuous_midpoint=df[df.columns[-1]].median(),
+                        labels={'selected_set': 'consumption'},
+                        title=None,
+                        height=300
+
+                        )
+
+    fig.update_layout(
+        margin=dict(
+            l=10,
+            r=10,
+            b=20,
+            t=20,
+            pad=4
+        ),
+    )
+
+    return fig
+
 
 if __name__ == '__main__':
     app.run_server()
