@@ -55,9 +55,7 @@ for column in concatenated.columns:
 concatenated = concatenated.reset_index()
 # ------------------------------------------------------------------------------
 
-app = dash.Dash(
-    __name__, meta_tags=[{"name": "viewport", "content": "width=device-width"}]
-)
+app = dash.Dash()
 server = app.server
 
 # -------------------------------------------------------------------------------
