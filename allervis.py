@@ -68,17 +68,6 @@ app.layout = html.Div([
     html.Div([
         html.Div(
             [
-                html.P(
-                    "Filter by date (or select range in histogram):",
-                    className="control_label",
-                ),
-                dcc.RangeSlider(
-                    id="year_slider",
-                    min=1960,
-                    max=2017,
-                    value=[1990, 2010],
-                    className="dcc_control",
-                ),
                 html.P("Filter by allergen:", className="control_label"),
                 dcc.RadioItems(
                     id="allergen_selector",
@@ -97,12 +86,6 @@ app.layout = html.Div([
                     value=list(allergen_data.keys()),
                     className="dcc_control",
                 ),
-                dcc.Checklist(
-                    id="lock_selector",
-                    options=[{"label": "Lock camera", "value": "locked"}],
-                    className="dcc_control",
-                    value=[],
-                ),
             ],
             className="pretty_container four columns",
             id="cross-filter-options",
@@ -110,32 +93,6 @@ app.layout = html.Div([
 
         html.Div(
             [
-                html.Div(
-                    [
-                        html.Div(
-                            [html.H6(id="well_text"), html.P("No. of Wells")],
-                            id="wells",
-                            className="mini_container",
-                        ),
-                        html.Div(
-                            [html.H6(id="gasText"), html.P("Gas")],
-                            id="gas",
-                            className="mini_container",
-                        ),
-                        html.Div(
-                            [html.H6(id="oilText"), html.P("Oil")],
-                            id="oil",
-                            className="mini_container",
-                        ),
-                        html.Div(
-                            [html.H6(id="waterText"), html.P("Water")],
-                            id="water",
-                            className="mini_container",
-                        ),
-                    ],
-                    id="info-container",
-                    className="row container-display",
-                ),
                 html.Div(
                     [dcc.Graph(id="count_graph")],
                     id="countGraphContainer",
