@@ -1,10 +1,9 @@
-import os
-
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output, State, ClientsideFunction
 
+import plotly.express as px
 
 import pandas as pd
 import numpy as np
@@ -94,12 +93,12 @@ app.layout = html.Div([
         html.Div(
             [
                 html.Div(
-                    [dcc.Graph(id="count_graph")],
-                    id="countGraphContainer",
+                    [dcc.Graph(id="stack_barchart_graph")],
+                    id="stack_barchart_container",
                     className="pretty_container",
                 ),
             ],
-            id="right-column",
+            id="stack_barchart_area",
             className="eight columns",
         ),
     ],
@@ -123,6 +122,17 @@ def display_status(selector):
         return ["AC"]
     return []
 
+
+# Graph
+@app.callback(
+    Output("stack_barchart_graph", "figure"), [Input("allergens", "value")]
+)
+def update_plot(selected_allergens):
+    ascending = True
+    concatenated['selected_set'] = concatenated.apply(lambda row: row[selected_allergens].sum(), axis=1)
+    concatenated.sort_values('selected_set', ascending=ascending, inplace=True)
+    fig = px.bar(concatenated, x='Entity', y=selected_allergens, title="Rankings", orientation='v', height=500)
+    return fig
 
 if __name__ == '__main__':
     app.run_server()
