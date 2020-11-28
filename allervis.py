@@ -88,6 +88,22 @@ app.layout = html.Div([
                     value=list(allergen_data.keys()),
                     className="dcc_control",
                 ),
+
+                html.P("Select color scheme:", className="control_label"),
+                html.Div([
+                        dcc.RadioItems(
+                            id="color_scheme_selector",
+                            options=[
+                                {"label": "Sequential ", "value": "sequential"},
+                                {"label": "Diverging ", "value": "diverging"},
+                            ],
+                            value="active",
+                            labelStyle={"display": "inline-block"},
+                            className="dcc_control",
+                        ),
+                            ],
+                        style={'margin': '10px'}),
+
             ],
             className="pretty_container four columns",
             id="cross-filter-options",
@@ -108,7 +124,8 @@ app.layout = html.Div([
             ],
             id="map_area",
             className="eight columns",
-            style={"margin": "5px", "width": "58%", 'display': 'inline-block', 'position': 'relative'}
+            style={"margin": "5px", "width": "58%", 'display': 'inline-block', 'position': 'relative',
+                   "box-shadow": "0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 6px 20px 0 rgba(0, 0, 0, 0.05)"}
         ),
 
         html.Div(
@@ -121,7 +138,7 @@ app.layout = html.Div([
             ],
             id="stack_barchart_area",
             className="eight columns",
-            style={"margin": "5px"}
+            style={"margin": "5px", "box-shadow": "0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 6px 20px 0 rgba(0, 0, 0, 0.05)"}
         ),
     ],
         className="row flex-display",
@@ -179,17 +196,28 @@ def update_plot(selected_allergens):
 
 
 @app.callback(
-    Output("map_graph", "figure"), [Input("allergens", "value")]
+    Output("map_graph", "figure"), [Input("allergens", "value"), Input("color_scheme_selector", "value")]
 )
-def update_plot(selected_allergens):
+def update_plot(selected_allergens, color_scheme):
+
     concatenated['selected_set'] = concatenated.apply(lambda row: row[selected_allergens].sum(), axis=1)
+
+    color_continuous_scale = px.colors.diverging.RdYlGn_r
+    color_continuous_midpoint = concatenated['selected_set'].mean()
+
+    if color_scheme == 'diverging':
+        color_continuous_scale = px.colors.diverging.RdYlGn_r
+        color_continuous_midpoint = concatenated['selected_set'].mean()
+    elif color_scheme == 'sequential':
+        color_continuous_scale = px.colors.sequential.Blues
+
+
     fig = px.choropleth(concatenated,
                         locations='Code',
                         color='selected_set',
                         hover_name="Entity",  # column to add to hover information
-                        # color_continuous_scale=px.colors.sequential.Blues,
-                        color_continuous_scale=px.colors.diverging.RdYlGn_r,
-                        # color_continuous_midpoint=df[df.columns[-1]].median(),
+                        color_continuous_scale=color_continuous_scale,
+                        # color_continuous_midpoint=color_continuous_midpoint,
                         labels={'selected_set': 'consumption'},
                         title=None,
                         height=300
