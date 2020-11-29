@@ -22,46 +22,52 @@ allergen_paths = {
     'Milk': f'{data_path}//per-capita-milk-consumption.csv',
     'Peanut': f'{data_path}//per-capita-peanut-consumption.csv'
 }
+
+list_of_allergens = list(allergen_paths.keys())
 # ---------------------------------------------------
-allergen_data = {}
-for allergen, path in allergen_paths.items():
-    df = pd.read_csv(path)
-    allergen_data[allergen] = df
+preprocess = False
 
-# retrieving the most recent year data for each country
-all_dfs_most_recent_values = {}
+if preprocess:
+    allergen_data = {}
+    for allergen, path in allergen_paths.items():
+        df = pd.read_csv(path)
+        allergen_data[allergen] = df
 
-for allergen in allergen_data.keys():
-    df = allergen_data[allergen]
-    most_recent_year = df['Year'].iloc[-1]
+    # retrieving the most recent year data for each country
+    all_dfs_most_recent_values = {}
 
-    df_most_recent_values = df.groupby(['Code', 'Entity']).apply(lambda x: pd.Series(
-        {allergen: x[df.columns[-1]].iloc[-1]}))
+    for allergen in allergen_data.keys():
+        df = allergen_data[allergen]
+        most_recent_year = df['Year'].iloc[-1]
 
-    all_dfs_most_recent_values[allergen] = df_most_recent_values
+        df_most_recent_values = df.groupby(['Code', 'Entity']).apply(lambda x: pd.Series(
+            {allergen: x[df.columns[-1]].iloc[-1]}))
 
-# concatenating all allergens into one df
-concatenated = pd.concat(all_dfs_most_recent_values.values(), axis=1)
+        all_dfs_most_recent_values[allergen] = df_most_recent_values
 
-# imputing the missing data with the given strategy
-imputer = SimpleImputer(missing_values=np.nan, strategy='median')
-scaler = MinMaxScaler()
+    # concatenating all allergens into one df
+    concatenated = pd.concat(all_dfs_most_recent_values.values(), axis=1)
 
-for column in concatenated.columns:
-    concatenated[column] = imputer.fit_transform(np.array(concatenated[column]).reshape(-1, 1))
-    concatenated[column] = scaler.fit_transform(np.array(concatenated[column]).reshape(-1, 1))
+    # imputing the missing data with the given strategy
+    imputer = SimpleImputer(missing_values=np.nan, strategy='median')
+    scaler = MinMaxScaler()
 
-concatenated = concatenated.reset_index()
+    for column in concatenated.columns:
+        concatenated[column] = imputer.fit_transform(np.array(concatenated[column]).reshape(-1, 1))
+        concatenated[column] = scaler.fit_transform(np.array(concatenated[column]).reshape(-1, 1))
+
+    concatenated = concatenated.reset_index()
+    concatenated.to_csv(f'{data_path}//concatenated.csv', index=False)
 # ------------------------------------------------------------------------------
+
+concatenated = pd.read_csv(f'{data_path}//concatenated.csv')
 
 app = dash.Dash()
 server = app.server
 
 # -------------------------------------------------------------------------------
 
-allergen_options = [
-    {"label": str(allergen), "value": str(allergen)} for allergen in allergen_data.keys()
-]
+allergen_options = [{"label": str(allergen), "value": str(allergen)} for allergen in list_of_allergens]
 
 app.layout = html.Div([
     html.Div([
@@ -91,7 +97,7 @@ app.layout = html.Div([
                     id="allergens",
                     options=allergen_options,
                     multi=True,
-                    value=list(allergen_data.keys()),
+                    value=list_of_allergens,
                     className="dcc_control",
                 ),
 
@@ -162,9 +168,7 @@ app.layout = html.Div([
 )
 def display_status(selector):
     if selector == "all":
-        return list(allergen_data.keys())
-    elif selector == "active":
-        return ["AC"]
+        return list_of_allergens
     return []
 
 
