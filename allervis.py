@@ -199,7 +199,11 @@ def update_plot(selected_allergens):
     ascending = True
     concatenated['selected_set'] = concatenated.apply(lambda row: row[selected_allergens].sum(), axis=1)
     concatenated.sort_values('selected_set', ascending=ascending, inplace=True)
-    fig = px.bar(concatenated, x='Entity', y=selected_allergens, orientation='v', height=500)
+    fig = px.bar(concatenated, x='Entity', y=selected_allergens, orientation='v', height=500,
+                 labels={'variable': 'Allergen',
+                         'Entity': 'Country',
+                         },
+                 )
 
     fig.update_layout(
         legend=dict(
@@ -271,7 +275,7 @@ def update_plot(selected_allergens, map_idiom, color_scheme):
                             # color_continuous_midpoint=color_continuous_midpoint,
                             labels={'selected_set': 'Prevalence',
                                     'most_prevalent_allergen': 'Most Prevalent Allergen',
-                                    'least_prevalent_allergen': 'Least Prevalent Allergen'
+                                    'least_prevalent_allergen': 'Least Prevalent Allergen',
                                     },
                             title=None,
                             height=339
