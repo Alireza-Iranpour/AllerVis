@@ -239,6 +239,12 @@ def update_plot(selected_allergens):
 )
 def update_plot(selected_allergens, map_idiom, color_scheme):
     concatenated['selected_set'] = concatenated.apply(lambda row: row[selected_allergens].sum(), axis=1)
+    concatenated['most_prevalent_allergen'] = concatenated.apply(
+        lambda row: row[selected_allergens][row[selected_allergens] == row[selected_allergens].max()].index[0],
+        axis=1)
+    concatenated['least_prevalent_allergen'] = concatenated.apply(
+        lambda row: row[selected_allergens][row[selected_allergens] == row[selected_allergens].min()].index[0],
+        axis=1)
 
     color = 'selected_set'
     color_continuous_scale = px.colors.sequential.Blues
@@ -251,16 +257,11 @@ def update_plot(selected_allergens, map_idiom, color_scheme):
         color_continuous_scale = px.colors.sequential.Blues
 
     elif color_scheme == 'mpa':
-        concatenated['most_prevalent_allergen'] = concatenated.apply(
-            lambda row: row[selected_allergens][row[selected_allergens] == row[selected_allergens].max()].index[0],
-            axis=1)
         concatenated.sort_values(['most_prevalent_allergen'], inplace=True)
         color = 'most_prevalent_allergen'
 
     elif color_scheme == 'lpa':
-        concatenated['least_prevalent_allergen'] = concatenated.apply(
-            lambda row: row[selected_allergens][row[selected_allergens] == row[selected_allergens].min()].index[0],
-            axis=1)
+
         concatenated.sort_values(['least_prevalent_allergen'], inplace=True)
         color = 'least_prevalent_allergen'
 
