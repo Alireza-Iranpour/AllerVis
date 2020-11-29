@@ -73,26 +73,26 @@ app.layout = html.Div([
     html.Div([
         html.Div(
             [
-            html.Div([
-                html.P("AllerVis", className="control_label"),
+                html.Div([
+                    html.P("AllerVis", className="control_label"),
                 ],
-                style={'margin': '0px, 10px', 'font-size': '30px',
-                       "font-family": "Helvetica", "font-weight": "bold"}
-            ),
+                    style={'margin': '0px, 10px', 'font-size': '30px',
+                           "font-family": "Helvetica", "font-weight": "bold"}
+                ),
                 html.P("Filter by allergen:", className="control_label"),
                 html.Div([
-                        dcc.RadioItems(
-                            id="allergen_selector",
-                            options=[
-                                {"label": "All ", "value": "all"},
-                                {"label": "Customize ", "value": "custom"},
-                            ],
-                            value="custom",
-                            labelStyle={"display": "inline-block"},
-                            className="dcc_control",
-                        ),
-                            ],
-                        style={'margin': '10px'}),
+                    dcc.RadioItems(
+                        id="allergen_selector",
+                        options=[
+                            {"label": "All ", "value": "all"},
+                            {"label": "Customize ", "value": "custom"},
+                        ],
+                        value="all",
+                        labelStyle={"display": "inline-block"},
+                        className="dcc_control",
+                    ),
+                ],
+                    style={'margin': '10px'}),
                 dcc.Dropdown(
                     id="allergens",
                     options=allergen_options,
@@ -103,18 +103,20 @@ app.layout = html.Div([
 
                 html.P("Select color scheme:", className="control_label"),
                 html.Div([
-                        dcc.RadioItems(
-                            id="color_scheme_selector",
-                            options=[
-                                {"label": "Sequential ", "value": "sequential"},
-                                {"label": "Diverging ", "value": "diverging"},
-                            ],
-                            value="sequential",
-                            labelStyle={"display": "inline-block"},
-                            className="dcc_control",
-                        ),
-                            ],
-                        style={'margin': '10px'}),
+                    dcc.RadioItems(
+                        id="color_scheme_selector",
+                        options=[
+                            {"label": "Sequential ", "value": "sequential"},
+                            {"label": "Diverging ", "value": "diverging"},
+                            {"label": "Most Prevalent ", "value": "mpa"},
+                            {"label": "Least Prevalent ", "value": "lpa"},
+                        ],
+                        value="sequential",
+                        labelStyle={"display": "inline-block"},
+                        className="dcc_control",
+                    ),
+                ],
+                    style={'margin': '10px'}),
 
             ],
             className="pretty_container four columns",
@@ -172,11 +174,13 @@ def display_status(selector):
     return []
 
 
+# -------------------------------------------------------------------------------------------
 # Graph
 @app.callback(
     Output("stack_barchart_graph", "figure"), [Input("allergens", "value")]
 )
 def update_plot(selected_allergens):
+    selected_allergens.sort()
     ascending = True
     concatenated['selected_set'] = concatenated.apply(lambda row: row[selected_allergens].sum(), axis=1)
     concatenated.sort_values('selected_set', ascending=ascending, inplace=True)
@@ -205,14 +209,16 @@ def update_plot(selected_allergens):
     return fig
 
 
+# -------------------------------------------------------------------------------------
+
 @app.callback(
     Output("map_graph", "figure"), [Input("allergens", "value"), Input("color_scheme_selector", "value")]
 )
 def update_plot(selected_allergens, color_scheme):
-
     concatenated['selected_set'] = concatenated.apply(lambda row: row[selected_allergens].sum(), axis=1)
 
-    color_continuous_scale = px.colors.diverging.RdYlGn_r
+    color = 'selected_set'
+    color_continuous_scale = px.colors.sequential.Blues
     color_continuous_midpoint = concatenated['selected_set'].mean()
 
     if color_scheme == 'diverging':
@@ -221,14 +227,30 @@ def update_plot(selected_allergens, color_scheme):
     elif color_scheme == 'sequential':
         color_continuous_scale = px.colors.sequential.Blues
 
+    elif color_scheme == 'mpa':
+        concatenated['most_prevalent_allergen'] = concatenated.apply(
+            lambda row: row[selected_allergens][row[selected_allergens] == row[selected_allergens].max()].index[0],
+            axis=1)
+        concatenated.sort_values(['most_prevalent_allergen'], inplace=True)
+        color = 'most_prevalent_allergen'
+
+    elif color_scheme == 'lpa':
+        concatenated['least_prevalent_allergen'] = concatenated.apply(
+            lambda row: row[selected_allergens][row[selected_allergens] == row[selected_allergens].min()].index[0],
+            axis=1)
+        concatenated.sort_values(['least_prevalent_allergen'], inplace=True)
+        color = 'least_prevalent_allergen'
 
     fig = px.choropleth(concatenated,
                         locations='Code',
-                        color='selected_set',
+                        color=color,
                         hover_name="Entity",  # column to add to hover information
                         color_continuous_scale=color_continuous_scale,
                         # color_continuous_midpoint=color_continuous_midpoint,
-                        labels={'selected_set': 'consumption'},
+                        labels={'selected_set': 'Prevalence',
+                                'most_prevalent_allergen': 'Most Prevalent Allergen',
+                                'least_prevalent_allergen': 'Least Prevalent Allergen'
+                                },
                         title=None,
                         height=300
 
@@ -245,6 +267,55 @@ def update_plot(selected_allergens, color_scheme):
     )
 
     return fig
+
+
+# ------------------------------------------------------------------------
+"""@app.callback(
+    Output("map_graph", "figure"), [Input("allergens", "value"), Input("color_scheme_selector", "value")]
+)
+def update_plot(selected_allergens, color_scheme):
+    concatenated['selected_set'] = concatenated.apply(
+        lambda row: row[selected_allergens].sum(), axis=1)
+    concatenated['most_prevalent_allergen'] = concatenated.apply(
+        lambda row: row[selected_allergens][row[selected_allergens] == row[selected_allergens].max()].index[0], axis=1)
+
+    color_continuous_scale = px.colors.diverging.RdYlGn_r
+    color_continuous_midpoint = concatenated['selected_set'].mean()
+    color = 'selected_set'
+
+    if color_scheme == 'diverging':
+        color_continuous_scale = px.colors.diverging.RdYlGn_r
+        color_continuous_midpoint = concatenated['selected_set'].mean()
+    elif color_scheme == 'sequential':
+        color_continuous_scale = px.colors.sequential.Blues
+    elif color_scheme == 'mpa':
+        color = 'most_prevalent_allergen'
+
+    fig = px.scatter_geo(concatenated,
+                         locations='Code',
+                         color=color,
+                         hover_name="Entity",  # column to add to hover information
+                         color_continuous_scale=color_continuous_scale,
+                         labels={'selected_set': 'Prevalence'},
+                         title=None,
+                         height=300
+
+                         )
+
+    fig.update_layout(
+        margin=dict(
+            l=10,
+            r=10,
+            b=20,
+            t=20,
+            pad=4
+        ),
+    )
+
+    return fig
+"""
+
+# ---------------------------------------------------------------------------------------
 
 
 if __name__ == '__main__':
