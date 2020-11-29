@@ -76,7 +76,7 @@ app.layout = html.Div([
                 html.Div([
                     html.P("AllerVis", className="control_label"),
                 ],
-                    style={'margin': '0px, 10px', 'font-size': '30px',
+                    style={'margin': '0px, 0px', 'font-size': '25px',
                            "font-family": "Helvetica", "font-weight": "bold"}
                 ),
                 html.P("Filter by allergen:", className="control_label"),
@@ -92,7 +92,7 @@ app.layout = html.Div([
                         className="dcc_control",
                     ),
                 ],
-                    style={'margin': '10px'}),
+                    style={'margin': '5px'}),
                 dcc.Dropdown(
                     id="allergens",
                     options=allergen_options,
@@ -100,6 +100,21 @@ app.layout = html.Div([
                     value=list_of_allergens,
                     className="dcc_control",
                 ),
+
+                html.P("Select map idiom:", className="control_label"),
+                html.Div([
+                    dcc.RadioItems(
+                        id="map_idiom_selector",
+                        options=[
+                            {"label": "Choropleth ", "value": "choropleth"},
+                            {"label": "Bubble map ", "value": "bubble"}
+                        ],
+                        value="choropleth",
+                        labelStyle={"display": "inline-block"},
+                        className="dcc_control",
+                    ),
+                ],
+                    style={'margin': '5px'}),
 
                 html.P("Select color scheme:", className="control_label"),
                 html.Div([
@@ -116,7 +131,7 @@ app.layout = html.Div([
                         className="dcc_control",
                     ),
                 ],
-                    style={'margin': '10px'}),
+                    style={'margin': '5px'}),
 
             ],
             className="pretty_container four columns",
@@ -212,9 +227,13 @@ def update_plot(selected_allergens):
 # -------------------------------------------------------------------------------------
 
 @app.callback(
-    Output("map_graph", "figure"), [Input("allergens", "value"), Input("color_scheme_selector", "value")]
+    Output("map_graph", "figure"),
+    [Input("allergens", "value"),
+     Input("map_idiom_selector", "value"),
+     Input("color_scheme_selector", "value")
+     ]
 )
-def update_plot(selected_allergens, color_scheme):
+def update_plot(selected_allergens, map_idiom, color_scheme):
     concatenated['selected_set'] = concatenated.apply(lambda row: row[selected_allergens].sum(), axis=1)
 
     color = 'selected_set'
@@ -241,30 +260,57 @@ def update_plot(selected_allergens, color_scheme):
         concatenated.sort_values(['least_prevalent_allergen'], inplace=True)
         color = 'least_prevalent_allergen'
 
-    fig = px.choropleth(concatenated,
-                        locations='Code',
-                        color=color,
-                        hover_name="Entity",  # column to add to hover information
-                        color_continuous_scale=color_continuous_scale,
-                        # color_continuous_midpoint=color_continuous_midpoint,
-                        labels={'selected_set': 'Prevalence',
-                                'most_prevalent_allergen': 'Most Prevalent Allergen',
-                                'least_prevalent_allergen': 'Least Prevalent Allergen'
-                                },
-                        title=None,
-                        height=300
+    fig = 0
 
-                        )
+    if map_idiom == 'choropleth':
+        fig = px.choropleth(concatenated,
+                            locations='Code',
+                            color=color,
+                            hover_name="Entity",  # column to add to hover information
+                            color_continuous_scale=color_continuous_scale,
+                            # color_continuous_midpoint=color_continuous_midpoint,
+                            labels={'selected_set': 'Prevalence',
+                                    'most_prevalent_allergen': 'Most Prevalent Allergen',
+                                    'least_prevalent_allergen': 'Least Prevalent Allergen'
+                                    },
+                            title=None,
+                            height=339
 
-    fig.update_layout(
-        margin=dict(
-            l=10,
-            r=10,
-            b=20,
-            t=20,
-            pad=4
-        ),
-    )
+                            )
+        fig.update_layout(
+            margin=dict(
+                l=10,
+                r=10,
+                b=20,
+                t=20,
+                pad=4
+            ),
+        )
+
+    elif map_idiom == 'bubble':
+
+        fig = px.scatter_geo(concatenated,
+                             locations='Code',
+                             color=color,
+                             size='selected_set',
+                             hover_name="Entity",  # column to add to hover information
+                             color_continuous_scale=color_continuous_scale,
+                             labels={'selected_set': 'Prevalence',
+                                     'most_prevalent_allergen': 'Most Prevalent Allergen',
+                                     'least_prevalent_allergen': 'Least Prevalent Allergen'},
+                             title=None,
+                             height=339
+                             )
+
+        fig.update_layout(
+            margin=dict(
+                l=10,
+                r=10,
+                b=20,
+                t=20,
+                pad=4
+            ),
+        )
 
     return fig
 
