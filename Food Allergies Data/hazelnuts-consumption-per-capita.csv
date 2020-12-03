@@ -1,0 +1,101 @@
+Entity,Code,Year,HazelnutsConsumptionPerCapita(kg/year),EstHazelnutsConsumptionPerCapita(kg/year)
+Italy,ITA,2012,1.19,1.58
+Italy,ITA,2013,1.46,1.94
+Italy,ITA,2014,1.33,1.77
+Italy,ITA,2015,1.50,2.00
+Italy,ITA,2016,1.31,1.75
+Turkey,TUR,2012,1.15,2.30
+Turkey,TUR,2013,0.89,1.78
+Turkey,TUR,2014,0.80,1.60
+Turkey,TUR,2015,0.51,1.02
+Turkey,TUR,2016,0.75,1.51
+Germany,DEU,2012,0.64,1.29
+Germany,DEU,2013,0.75,1.51
+Germany,DEU,2014,0.63,1.26
+Germany,DEU,2015,0.73,1.45
+Germany,DEU,2016,0.68,1.36
+France,FRA,2012,0.44,1.77
+France,FRA,2013,0.42,1.66
+France,FRA,2014,0.37,1.49
+France,FRA,2015,0.42,1.69
+France,FRA,2016,0.39,1.56
+United States,USA,2012,0.03,0.08
+United States,USA,2013,0.02,0.07
+United States,USA,2014,0.04,0.11
+United States,USA,2015,0.03,0.08
+United States,USA,2016,0.05,0.14
+Canada,CAN,2012,0.33,0.98
+Canada,CAN,2013,0.28,0.85
+Canada,CAN,2014,0.27,0.82
+Canada,CAN,2015,0.35,1.07
+Canada,CAN,2016,0.31,0.95
+Spain,ESP,2012,0.24,0.47
+Spain,ESP,2013,0.27,0.54
+Spain,ESP,2014,0.23,0.47
+Spain,ESP,2015,0.27,0.53
+Spain,ESP,2016,0.22,0.43
+Azerbaijan,AZE,2012,0.84,0.93
+Azerbaijan,AZE,2013,0.57,0.63
+Azerbaijan,AZE,2014,0.17,0.19
+Azerbaijan,AZE,2015,0.81,0.90
+Azerbaijan,AZE,2016,1.02,1.13
+Switzerland,CHE,2012,1.09,1.46
+Switzerland,CHE,2013,1.24,1.66
+Switzerland,CHE,2014,1.19,1.58
+Switzerland,CHE,2015,1.04,1.38
+Switzerland,CHE,2016,1.10,1.46
+Russia,RUS,2012,0.09,0.37
+Russia,RUS,2013,0.06,0.26
+Russia,RUS,2014,0.08,0.32
+Russia,RUS,2015,0.04,0.17
+Russia,RUS,2016,0.04,0.15
+Belgium,BEL,2012,0.61,0.82
+Belgium,BEL,2013,0.64,0.85
+Belgium,BEL,2014,0.59,0.79
+Belgium,BEL,2015,0.41,0.54
+Belgium,BEL,2016,0.41,0.55
+Poland,POL,2012,0.27,1.06
+Poland,POL,2013,0.23,0.91
+Poland,POL,2014,0.21,0.82
+Poland,POL,2015,0.30,1.19
+Poland,POL,2016,0.09,0.36
+Australia,AUS,2012,0.12,0.38
+Australia,AUS,2013,0.13,0.34
+Australia,AUS,2014,0.11,0.30
+Australia,AUS,2015,0.11,0.28
+Australia,AUS,2016,0.12,0.35
+Brazil,BRA,2012,0.01,0.06
+Brazil,BRA,2013,0.01,0.05
+Brazil,BRA,2014,0.02,0.06
+Brazil,BRA,2015,0.01,0.06
+Brazil,BRA,2016,0.01,0.05
+Austria,AUT,2012,0.20,0.40
+Austria,AUT,2013,0.28,0.55
+Austria,AUT,2014,0.31,0.61
+Austria,AUT,2015,0.27,0.54
+Austria,AUT,2016,0.23,0.47
+Egypt,EGY,2012,0.05,0.18
+Egypt,EGY,2013,0.04,0.14
+Egypt,EGY,2014,0.02,0.10
+Egypt,EGY,2015,0.02,0.08
+Egypt,EGY,2016,0.02,0.08
+United Kingdom,GBR,2012,0.03,0.08
+United Kingdom,GBR,2013,0.04,0.11
+United Kingdom,GBR,2014,0.03,0.08
+United Kingdom,GBR,2015,0.03,0.08
+United Kingdom,GBR,2016,0.02,0.06
+Greece,GRC,2012,0.17,0.69
+Greece,GRC,2013,0.17,0.67
+Greece,GRC,2014,0.13,0.50
+Greece,GRC,2015,0.10,0.40
+Greece,GRC,2016,0.11,0.43
+Israel,ISR,2012,0.22,0.90
+Israel,ISR,2013,0.16,0.62
+Israel,ISR,2014,0.16,0.63
+Israel,ISR,2015,0.12,0.49
+Israel,ISR,2016,0.14,0.55
+Saudi Arabia,SAU,2012,0.03,0.11
+Saudi Arabia,SAU,2013,0.03,0.10
+Saudi Arabia,SAU,2014,0.02,0.09
+Saudi Arabia,SAU,2015,0.02,0.10
+Saudi Arabia,SAU,2016,0.03,0.11
