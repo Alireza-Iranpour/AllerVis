@@ -113,7 +113,7 @@ app.layout = html.Div([
                     html.Div([
                         html.P("Filter by region:", className="control_label"),
                     ],
-                        style={'width': '40%', 'height': '2px', 'display': 'inline-block'}
+                        style={'width': '30%', 'height': '2px', 'display': 'inline-block'}
                     ),
                     html.Div([
                         dcc.Dropdown(
@@ -141,7 +141,7 @@ app.layout = html.Div([
                     html.Div([
                         html.P("Select map idiom:", className="control_label"),
                     ],
-                        style={'width': '40%', 'height': '2px', 'display': 'inline-block'}
+                        style={'width': '30%', 'height': '2px', 'display': 'inline-block'}
                     ),
 
                     html.Div([
@@ -191,8 +191,8 @@ app.layout = html.Div([
             [
                 html.Div(
                     [dcc.Graph(id="map_graph",
-                              config={'modeBarButtonsToRemove':['select2d', 'lasso2d'],
-                                      'displaylogo': False})],
+                               config={'modeBarButtonsToRemove': ['select2d', 'lasso2d'],
+                                       'displaylogo': False})],
                     id="map_container",
                     className="pretty_container",
                 ),
@@ -207,8 +207,8 @@ app.layout = html.Div([
             [
                 html.Div(
                     [dcc.Graph(id="stack_barchart_graph",
-                              config={'modeBarButtonsToRemove':['lasso2d'],
-                                      'displaylogo': False})],
+                               config={'modeBarButtonsToRemove': ['lasso2d'],
+                                       'displaylogo': False})],
                     id="stack_barchart_container",
                     className="pretty_container",
                 ),
