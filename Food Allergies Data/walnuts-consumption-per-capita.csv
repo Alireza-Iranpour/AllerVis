@@ -1,0 +1,101 @@
+Entity,Code,Year,WalnutsConsumptionPerCapita(kg/year),EstWalnutsConsumptionPerCapita(kg/year)
+China,CHN,2012,0.14,0.27
+China,CHN,2013,0.14,0.28
+China,CHN,2014,0.15,0.34
+China,CHN,2015,0.18,0.45
+China,CHN,2016,0.28,0.56
+United States,USA,2012,0.42,1.06
+United States,USA,2013,0.41,1.03
+United States,USA,2014,0.41,1.02
+United States,USA,2015,0.41,1.01
+United States,USA,2016,0.50,1.24
+Iran,IRN,2012,0.64,0.97
+Iran,IRN,2013,0.65,0.99
+Iran,IRN,2014,0.57,0.87
+Iran,IRN,2015,0.65,0.98
+Iran,IRN,2016,0.52,0.79
+France,FRA,2012,0.26,0.78
+France,FRA,2013,0.35,1.05
+France,FRA,2014,0.28,0.84
+France,FRA,2015,0.39,1.18
+France,FRA,2016,0.33,1.02
+Japan,JPN,2012,0.10,0.15
+Japan,JPN,2013,0.09,0.14
+Japan,JPN,2014,0.12,0.18
+Japan,JPN,2015,0.12,0.18
+Japan,JPN,2016,0.14,0.22
+Germany,DEU,2012,0.15,0.45
+Germany,DEU,2013,0.15,0.45
+Germany,DEU,2014,0.18,0.55
+Germany,DEU,2015,0.22,0.67
+Germany,DEU,2016,0.21,0.62
+South Korea,KOR,2012,0.25,0.76
+South Korea,KOR,2013,0.22,0.67
+South Korea,KOR,2014,0.26,0.79
+South Korea,KOR,2015,0.25,0.76
+South Korea,KOR,2016,0.32,0.96
+India,IND,2012,0.00,0.02
+India,IND,2013,0.01,0.03
+India,IND,2014,0.01,0.04
+India,IND,2015,0.01,0.05
+India,IND,2016,0.01,0.04
+Italy,ITA,2012,0.15,0.30
+Italy,ITA,2013,0.14,0.28
+Italy,ITA,2014,0.15,0.29
+Italy,ITA,2015,0.21,0.43
+Italy,ITA,2016,0.23,0.47
+Spain,ESP,2012,0.17,0.52
+Spain,ESP,2013,0.19,0.59
+Spain,ESP,2014,0.19,0.57
+Spain,ESP,2015,0.24,0.74
+Spain,ESP,2016,0.30,0.90
+Canada,CAN,2012,0.25,0.49
+Canada,CAN,2013,0.25,0.51
+Canada,CAN,2014,0.25,0.50
+Canada,CAN,2015,0.18,0.36
+Canada,CAN,2016,0.29,0.59
+Turkey,TUR,2012,0.41,0.82
+Turkey,TUR,2013,0.38,0.76
+Turkey,TUR,2014,0.38,0.77
+Turkey,TUR,2015,0.17,0.35
+Turkey,TUR,2016,0.12,0.25
+United Kingdom,GBR,2012,0.08,0.25
+United Kingdom,GBR,2013,0.09,0.26
+United Kingdom,GBR,2014,0.10,0.32
+United Kingdom,GBR,2015,0.13,0.39
+United Kingdom,GBR,2016,0.14,0.41
+Netherlands,NLD,2012,0.18,0.54
+Netherlands,NLD,2013,0.22,0.66
+Netherlands,NLD,2014,0.27,0.80
+Netherlands,NLD,2015,0.58,1.77
+Netherlands,NLD,2016,0.48,1.46
+Australia,AUS,2012,0.28,0.55
+Australia,AUS,2013,0.31,0.63
+Australia,AUS,2014,0.40,0.80
+Australia,AUS,2015,0.40,0.79
+Australia,AUS,2016,0.31,0.61
+Romania,ROU,2012,0.23,0.47
+Romania,ROU,2013,0.20,0.41
+Romania,ROU,2014,0.19,0.37
+Romania,ROU,2015,0.36,0.72
+Romania,ROU,2016,0.34,0.69
+Israel,ISR,2012,0.44,0.88
+Israel,ISR,2013,0.48,0.96
+Israel,ISR,2014,0.39,0.78
+Israel,ISR,2015,0.60,1.19
+Israel,ISR,2016,0.60,1.20
+Brazil,BRA,2012,0.02,0.06
+Brazil,BRA,2013,0.01,0.05
+Brazil,BRA,2014,0.01,0.06
+Brazil,BRA,2015,0.01,0.04
+Brazil,BRA,2016,0.02,0.06
+Chile,CHL,2012,0.14,0.43
+Chile,CHL,2013,0.16,0.49
+Chile,CHL,2014,0.48,0.45
+Chile,CHL,2015,0.17,0.51
+Chile,CHL,2016,0.16,0.47
+Greece,GRC,2012,0.10,0.19
+Greece,GRC,2013,0.14,0.27
+Greece,GRC,2014,0.13,0.25
+Greece,GRC,2015,0.23,0.46
+Greece,GRC,2016,0.22,0.44

@@ -1,0 +1,96 @@
+Entity,Code,Year,PecansConsumptionPerCapita(kg/year),EstPecansConsumptionPerCapita(kg/year)
+United States,USA,2012,0.195,0.780
+United States,USA,2013,0.159,0.636
+United States,USA,2014,0.218,0.872
+United States,USA,2015,0.202,0.810
+United States,USA,2016,0.202,0.807
+Mexico,MEX,2012,0.157,0.314
+Mexico,MEX,2013,0.265,0.530
+Mexico,MEX,2014,0.332,0.664
+Mexico,MEX,2015,0.210,0.420
+Mexico,MEX,2016,0.262,0.523
+Canada,CAN,2012,0.133,0.266
+Canada,CAN,2013,0.127,0.254
+Canada,CAN,2014,0.118,0.236
+Canada,CAN,2015,0.139,0.278
+Canada,CAN,2016,0.152,0.304
+Netherlands,NLD,2012,0.133,0.665
+Netherlands,NLD,2013,0.145,0.725
+Netherlands,NLD,2014,0.170,0.848
+Netherlands,NLD,2015,0.198,0.988
+Netherlands,NLD,2016,0.245,1.223
+United Kingdom,GBR,2012,0.039,0.156
+United Kingdom,GBR,2013,0.036,0.144
+United Kingdom,GBR,2014,0.039,0.155
+United Kingdom,GBR,2015,0.046,0.184
+United Kingdom,GBR,2016,0.039,0.156
+China,CHN,2012,<0.000,0.000
+China,CHN,2013,<0.000,0.001
+China,CHN,2014,<0.000,0.001
+China,CHN,2015,0.001,0.006
+China,CHN,2016,0.002,0.015
+Israel,ISR,2012,0.124,0.248
+Israel,ISR,2013,0.206,0.412
+Israel,ISR,2014,0.196,0.392
+Israel,ISR,2015,0.163,0.326
+Israel,ISR,2016,0.187,0.374
+France,FRA,2012,0.013,0.065
+France,FRA,2013,0.013,0.066
+France,FRA,2014,0.010,0.049
+France,FRA,2015,0.013,0.064
+France,FRA,2016,0.015,0.077
+Australia,AUS,2012,0.039,0.189
+Australia,AUS,2013,0.037,0.179
+Australia,AUS,2014,0.207,0.176
+Australia,AUS,2015,0.042,0.167
+Australia,AUS,2016,0.037,0.148
+Germany,DEU,2012,0.003,0.030
+Germany,DEU,2013,0.002,0.023
+Germany,DEU,2014,0.008,0.081
+Germany,DEU,2015,0.015,0.147
+Germany,DEU,2016,0.010,0.102
+South Korea,KOR,2012,0.003,0.030
+South Korea,KOR,2013,0.006,0.058
+South Korea,KOR,2014,0.008,0.081
+South Korea,KOR,2015,0.009,0.090
+South Korea,KOR,2016,0.012,0.120
+South Africa,ZAF,2012,0.010,0.020
+South Africa,ZAF,2013,0.014,0.027
+South Africa,ZAF,2014,0.014,0.027
+South Africa,ZAF,2015,0.014,0.027
+South Africa,ZAF,2016,0.009,0.018
+Belgium,BEL,2012,0.014,0.140
+Belgium,BEL,2013,0.011,0.113
+Belgium,BEL,2014,0.015,0.145
+Belgium,BEL,2015,0.020,0.202
+Belgium,BEL,2016,0.033,0.328
+Italy,ITA,2012,0.002,0.020
+Italy,ITA,2013,0.002,0.019
+Italy,ITA,2014,0.004,0.035
+Italy,ITA,2015,0.004,0.038
+Italy,ITA,2016,0.005,0.051
+Japan,JPN,2012,0.001,0.010
+Japan,JPN,2013,0.001,0.012
+Japan,JPN,2014,0.001,0.011
+Japan,JPN,2015,0.002,0.019
+Japan,JPN,2016,0.002,0.019
+Switzerland,CHE,2012,0.008,0.032
+Switzerland,CHE,2013,0.014,0.056
+Switzerland,CHE,2014,0.026,0.105
+Switzerland,CHE,2015,0.020,0.081
+Switzerland,CHE,2016,0.027,0.110
+Spain,ESP,2012,0.001,0.010
+Spain,ESP,2013,0.002,0.016
+Spain,ESP,2014,0.002,0.015
+Spain,ESP,2015,0.003,0.028
+Spain,ESP,2016,0.004,0.041
+United Arab Emirates,ARE,2012,0.006,0.012
+United Arab Emirates,ARE,2013,0.012,0.024
+United Arab Emirates,ARE,2014,0.011,0.021
+United Arab Emirates,ARE,2015,0.018,0.035
+United Arab Emirates,ARE,2016,0.016,0.032
+Saudi Arabia,SAU,2012,0.002,0.020
+Saudi Arabia,SAU,2013,0.004,0.039
+Saudi Arabia,SAU,2014,0.004,0.041
+Saudi Arabia,SAU,2015,0.006,0.058
+Saudi Arabia,SAU,2016,0.004,0.042

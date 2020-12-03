@@ -1,0 +1,101 @@
+Entity,Code,Year,PistachiosConsumptionPerCapita(kg/year),EstPistachiosConsumptionPerCapita(kg/year)
+Turkey,TUR,2012,1.14,1.90
+Turkey,TUR,2013,1.68,2.81
+Turkey,TUR,2014,0.93,1.54
+Turkey,TUR,2015,1.52,2.53
+Turkey,TUR,2016,1.64,2.73
+United States,USA,2012,0.12,0.24
+United States,USA,2013,0.82,1.64
+United States,USA,2014,0.09,0.18
+United States,USA,2015,0.24,0.48
+United States,USA,2016,0.29,0.58
+Iran,IRN,2012,0.34,0.56
+Iran,IRN,2013,0.36,0.61
+Iran,IRN,2014,0.51,0.85
+Iran,IRN,2015,0.51,0.84
+Iran,IRN,2016,0.62,1.03
+China,CHN,2012,0.05,0.21
+China,CHN,2013,0.04,0.17
+China,CHN,2014,0.03,0.12
+China,CHN,2015,0.02,0.06
+China,CHN,2016,0.02,0.10
+Syria,SYR,2012,1.17,0.88
+Syria,SYR,2013,0.78,1.03
+Syria,SYR,2014,0.91,1.21
+Syria,SYR,2015,1.36,1.02
+Syria,SYR,2016,1.11,1.48
+Germany,DEU,2012,0.34,1.04
+Germany,DEU,2013,0.45,1.36
+Germany,DEU,2014,0.17,0.53
+Germany,DEU,2015,0.22,0.67
+Germany,DEU,2016,0.18,0.54
+Italy,ITA,2012,0.16,0.65
+Italy,ITA,2013,0.16,0.64
+Italy,ITA,2014,0.15,0.61
+Italy,ITA,2015,0.17,0.66
+Italy,ITA,2016,0.19,0.75
+Spain,ESP,2012,0.19,0.76
+Spain,ESP,2013,0.18,0.71
+Spain,ESP,2014,0.15,0.61
+Spain,ESP,2015,0.14,0.56
+Spain,ESP,2016,0.18,0.71
+India,IND,2012,0.01,0.06
+India,IND,2013,0.01,0.10
+India,IND,2014,0.00,0.04
+India,IND,2015,0.00,0.05
+India,IND,2016,0.01,0.06
+France,FRA,2012,0.20,0.59
+France,FRA,2013,0.13,0.41
+France,FRA,2014,0.12,0.38
+France,FRA,2015,0.11,0.32
+France,FRA,2016,0.11,0.33
+Afghanistan,AFG,2012,0.61,1.23
+Afghanistan,AFG,2013,0.63,1.27
+Afghanistan,AFG,2014,0.32,0.64
+Afghanistan,AFG,2015,0.22,0.43
+Afghanistan,AFG,2016,0.19,0.39
+Saudi Arabia,SAU,2012,0.03,0.04
+Saudi Arabia,SAU,2013,0.18,0.30
+Saudi Arabia,SAU,2014,0.04,0.06
+Saudi Arabia,SAU,2015,0.20,0.34
+Saudi Arabia,SAU,2016,0.12,0.21
+United Kingdom,GBR,2012,0.06,0.19
+United Kingdom,GBR,2013,0.04,0.12
+United Kingdom,GBR,2014,0.05,0.15
+United Kingdom,GBR,2015,0.06,0.17
+United Kingdom,GBR,2016,0.05,0.17
+Australia,AUS,2012,0.14,0.28
+Australia,AUS,2013,0.16,0.32
+Australia,AUS,2014,0.15,0.30
+Australia,AUS,2015,0.14,0.29
+Australia,AUS,2016,0.14,0.28
+Lebanon,LBN,2012,0.63,0.84
+Lebanon,LBN,2013,1.14,1.52
+Lebanon,LBN,2014,0.32,0.43
+Lebanon,LBN,2015,0.26,0.35
+Lebanon,LBN,2016,0.53,0.70
+Israel,ISR,2012,0.48,0.97
+Israel,ISR,2013,0.38,1.15
+Israel,ISR,2014,0.52,1.57
+Israel,ISR,2015,0.29,0.89
+Israel,ISR,2016,0.33,0.99
+Russia,RUS,2012,0.13,0.25
+Russia,RUS,2013,0.11,0.22
+Russia,RUS,2014,0.03,0.06
+Russia,RUS,2015,0.01,0.03
+Russia,RUS,2016,0.02,0.04
+Poland,POL,2012,0.06,0.19
+Poland,POL,2013,0.05,0.15
+Poland,POL,2014,0.06,0.19
+Poland,POL,2015,0.04,0.13
+Poland,POL,2016,0.06,0.17
+Greece,GRC,2012,0.50,0.71
+Greece,GRC,2013,0.18,0.26
+Greece,GRC,2014,0.39,0.56
+Greece,GRC,2015,0.34,0.49
+Greece,GRC,2016,0.18,0.26
+Japan,JPN,2012,0.02,0.08
+Japan,JPN,2013,0.02,0.07
+Japan,JPN,2014,0.02,0.08
+Japan,JPN,2015,0.01,0.06
+Japan,JPN,2016,0.01,0.05
