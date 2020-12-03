@@ -109,52 +109,54 @@ app.layout = html.Div([
                     className="dcc_control",
                 ),
                 html.Div([
-                html.Div([
-                    html.P("Filter by region:", className="control_label"),
+                    html.Div([
+                        html.P("Filter by region:", className="control_label"),
                     ],
-                    style={'width': '40%', 'height': '2px', 'display': 'inline-block'}
-                ),
-                html.Div([
-                    dcc.Dropdown(
-                        id="regions",
-                        options=[{"label": "World ", "value": "world"},
-                                 {"label": "Europe ", "value": "europe"},
-                                 {"label": "Asia ", "value": "asia"},
-                                 {"label": "Africa ", "value": "africa"},
-                                 {"label": "North America ", "value": "north america"},
-                                 {"label": "South America ", "value": "south america"},
-                                 ],
-                        multi=False,
-                        value='world',
-                        className="dcc_control",
+                        style={'width': '40%', 'height': '2px', 'display': 'inline-block'}
                     ),
-                ],
-                    style={'margin': '5px', 'width': '200px', 'height': '20px',
-                           'font-size': "100%", 'display': 'inline-block'}
-                )
+                    html.Div([
+                        dcc.Dropdown(
+                            id="regions",
+                            options=[{"label": "World ", "value": "world"},
+                                     {"label": "Europe ", "value": "europe"},
+                                     {"label": "Asia ", "value": "asia"},
+                                     {"label": "Africa ", "value": "africa"},
+                                     {"label": "North America ", "value": "north america"},
+                                     {"label": "South America ", "value": "south america"},
+                                     {"label": "Oceania ", "value": "oceania"},
+
+                                     ],
+                            multi=False,
+                            value='world',
+                            className="dcc_control",
+                        ),
+                    ],
+                        style={'margin': '5px', 'width': '200px', 'height': '20px',
+                               'font-size': "100%", 'display': 'inline-block'}
+                    )
                 ]),
 
                 html.Div([
-                html.Div([
-                    html.P("Select map idiom:", className="control_label"),
+                    html.Div([
+                        html.P("Select map idiom:", className="control_label"),
                     ],
-                    style={'width': '40%', 'height': '2px', 'display': 'inline-block'}
-                ),
-
-                html.Div([
-                    dcc.RadioItems(
-                        id="map_idiom_selector",
-                        options=[
-                            {"label": "Choropleth ", "value": "choropleth"},
-                            {"label": "Bubble map ", "value": "bubble"}
-                        ],
-                        value="choropleth",
-                        labelStyle={"display": "inline-block"},
-                        className="dcc_control",
+                        style={'width': '40%', 'height': '2px', 'display': 'inline-block'}
                     ),
-                ],
-                    style={'margin': '5px', 'display': 'inline-block'}
-                )
+
+                    html.Div([
+                        dcc.RadioItems(
+                            id="map_idiom_selector",
+                            options=[
+                                {"label": "Choropleth ", "value": "choropleth"},
+                                {"label": "Bubble map ", "value": "bubble"}
+                            ],
+                            value="choropleth",
+                            labelStyle={"display": "inline-block"},
+                            className="dcc_control",
+                        ),
+                    ],
+                        style={'margin': '5px', 'display': 'inline-block'}
+                    )
                 ]),
 
                 html.P("Select color scheme:", className="control_label"),
@@ -260,6 +262,8 @@ def update_plot(selected_allergens, selected_region):
         region_concatenated = concatenated[concatenated['Continent'] == "NAM"]
     elif selected_region == 'south america':
         region_concatenated = concatenated[concatenated['Continent'] == 'SA']
+    elif selected_region == 'oceania':
+        region_concatenated = concatenated[concatenated['Continent'] == 'OC']
 
     fig = px.bar(region_concatenated, x='Entity', y=selected_allergens, orientation='v', height=500,
                  labels={'variable': 'Allergen',
@@ -330,6 +334,9 @@ def update_plot(selected_allergens, selected_region, map_idiom, color_scheme):
 
     fig = 0
 
+    if selected_region == 'oceania':
+        selected_region = 'world'
+
     if map_idiom == 'choropleth':
         fig = px.choropleth(concatenated,
                             locations='Code',
@@ -353,8 +360,10 @@ def update_plot(selected_allergens, selected_region, map_idiom, color_scheme):
                 b=20,
                 t=20,
                 pad=4
-            ),
+            )
         )
+
+        # fig.update_geos(visible=False)
 
     elif map_idiom == 'bubble':
 
@@ -379,13 +388,15 @@ def update_plot(selected_allergens, selected_region, map_idiom, color_scheme):
                 b=20,
                 t=20,
                 pad=4
-            ),
+            )
         )
 
+        # fig.update_config({'modeBarButtonsToRemove': ['lasso2d']})
     return fig
 
 
 # ------------------------------------------------------------------------
+
 """@app.callback(
     Output("map_graph", "figure"), [Input("allergens", "value"), Input("color_scheme_selector", "value")]
 )
