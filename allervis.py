@@ -4,6 +4,7 @@ import dash_html_components as html
 from dash.dependencies import Input, Output, State, ClientsideFunction
 
 import plotly.express as px
+import plotly.graph_objects as go
 
 import pandas as pd
 import numpy as np
@@ -189,7 +190,9 @@ app.layout = html.Div([
         html.Div(
             [
                 html.Div(
-                    [dcc.Graph(id="map_graph")],
+                    [dcc.Graph(id="map_graph",
+                              config={'modeBarButtonsToRemove':['select2d', 'lasso2d'],
+                                      'displaylogo': False})],
                     id="map_container",
                     className="pretty_container",
                 ),
@@ -203,7 +206,9 @@ app.layout = html.Div([
         html.Div(
             [
                 html.Div(
-                    [dcc.Graph(id="stack_barchart_graph")],
+                    [dcc.Graph(id="stack_barchart_graph",
+                              config={'modeBarButtonsToRemove':['lasso2d'],
+                                      'displaylogo': False})],
                     id="stack_barchart_container",
                     className="pretty_container",
                 ),
@@ -351,7 +356,6 @@ def update_plot(selected_allergens, selected_region, map_idiom, color_scheme):
                                     },
                             title=None,
                             height=344
-
                             )
         fig.update_layout(
             margin=dict(
