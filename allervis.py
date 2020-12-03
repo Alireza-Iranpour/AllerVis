@@ -340,12 +340,14 @@ def update_plot(selected_allergens, selected_region, map_idiom, color_scheme):
     fig = 0
 
     if selected_region == 'oceania':
-        selected_region = 'world'
+        scope = 'world'
+    else:
+        scope = selected_region
 
     if map_idiom == 'choropleth':
         fig = px.choropleth(concatenated,
                             locations='Code',
-                            scope=selected_region,
+                            scope=scope,
                             color=color,
                             hover_name="Entity",  # column to add to hover information
                             color_continuous_scale=color_continuous_scale,
@@ -367,13 +369,17 @@ def update_plot(selected_allergens, selected_region, map_idiom, color_scheme):
             )
         )
 
-        # fig.update_geos(visible=False)
+        if selected_region == 'world':
+            fig.update_geos(visible=False)
+
+        if selected_region == 'oceania':
+            fig.update_geos(visible=False, center=dict(lon=130, lat=-30), projection_scale=3)
 
     elif map_idiom == 'bubble':
 
         fig = px.scatter_geo(concatenated,
                              locations='Code',
-                             scope=selected_region,
+                             scope=scope,
                              color=color,
                              size='selected_set',
                              hover_name="Entity",  # column to add to hover information
@@ -394,6 +400,10 @@ def update_plot(selected_allergens, selected_region, map_idiom, color_scheme):
                 pad=4
             )
         )
+
+        if selected_region == 'oceania':
+            fig.update_geos(center=dict(lon=130, lat=-30),
+                            projection_scale=3)
 
         # fig.update_config({'modeBarButtonsToRemove': ['lasso2d']})
     return fig
