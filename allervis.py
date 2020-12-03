@@ -57,6 +57,14 @@ if preprocess:
         concatenated[column] = scaler.fit_transform(np.array(concatenated[column]).reshape(-1, 1))
 
     concatenated = concatenated.reset_index()
+
+    # adding continent info
+    continents = pd.read_csv(f'{data_path}//continents.csv', keep_default_na=False)
+    continents['Continent'].replace({'NA': 'NAM'}, inplace=True)
+
+    concatenated = concatenated.merge(continents, how='left', left_on='Code', right_on='alpha3').drop(
+        columns=['alpha2', 'alpha3', 'numeric', 'fips', 'Country', 'Capital', 'Area in km²'])
+
     concatenated.to_csv(f'{data_path}//concatenated.csv', index=False)
 # ------------------------------------------------------------------------------
 
@@ -100,8 +108,39 @@ app.layout = html.Div([
                     value=list_of_allergens,
                     className="dcc_control",
                 ),
+                html.Div([
+                html.Div([
+                    html.P("Filter by region:", className="control_label"),
+                    ],
+                    style={'width': '40%', 'height': '2px', 'display': 'inline-block'}
+                ),
+                html.Div([
+                    dcc.Dropdown(
+                        id="regions",
+                        options=[{"label": "World ", "value": "world"},
+                                 {"label": "Europe ", "value": "europe"},
+                                 {"label": "Asia ", "value": "asia"},
+                                 {"label": "Africa ", "value": "africa"},
+                                 {"label": "North America ", "value": "north america"},
+                                 {"label": "South America ", "value": "south america"},
+                                 ],
+                        multi=False,
+                        value='world',
+                        className="dcc_control",
+                    ),
+                ],
+                    style={'margin': '5px', 'width': '200px', 'height': '20px',
+                           'font-size': "100%", 'display': 'inline-block'}
+                )
+                ]),
 
-                html.P("Select map idiom:", className="control_label"),
+                html.Div([
+                html.Div([
+                    html.P("Select map idiom:", className="control_label"),
+                    ],
+                    style={'width': '40%', 'height': '2px', 'display': 'inline-block'}
+                ),
+
                 html.Div([
                     dcc.RadioItems(
                         id="map_idiom_selector",
@@ -114,7 +153,9 @@ app.layout = html.Div([
                         className="dcc_control",
                     ),
                 ],
-                    style={'margin': '5px'}),
+                    style={'margin': '5px', 'display': 'inline-block'}
+                )
+                ]),
 
                 html.P("Select color scheme:", className="control_label"),
                 html.Div([
@@ -167,7 +208,9 @@ app.layout = html.Div([
             ],
             id="stack_barchart_area",
             className="eight columns",
-            style={"margin": "5px", "box-shadow": "0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 6px 20px 0 rgba(0, 0, 0, 0.05)"}
+            style={"margin": "5px",
+                   "box-shadow": "0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 6px 20px 0 rgba(0, 0, 0, 0.05)",
+                   }
         ),
     ],
         className="row flex-display",
@@ -181,7 +224,8 @@ app.layout = html.Div([
 
 # Radio -> multi
 @app.callback(
-    Output("allergens", "value"), [Input("allergen_selector", "value")]
+    Output("allergens", "value"),
+    [Input("allergen_selector", "value")]
 )
 def display_status(selector):
     if selector == "all":
@@ -192,14 +236,32 @@ def display_status(selector):
 # -------------------------------------------------------------------------------------------
 # Graph
 @app.callback(
-    Output("stack_barchart_graph", "figure"), [Input("allergens", "value")]
+    Output("stack_barchart_graph", "figure"),
+    [Input("allergens", "value"), Input("regions", "value")]
 )
-def update_plot(selected_allergens):
+def update_plot(selected_allergens, selected_region):
     selected_allergens.sort()
     ascending = True
+
     concatenated['selected_set'] = concatenated.apply(lambda row: row[selected_allergens].sum(), axis=1)
     concatenated.sort_values('selected_set', ascending=ascending, inplace=True)
-    fig = px.bar(concatenated, x='Entity', y=selected_allergens, orientation='v', height=500,
+
+    region_concatenated = concatenated
+
+    if selected_region == 'world':
+        region_concatenated = concatenated
+    elif selected_region == 'europe':
+        region_concatenated = concatenated[concatenated['Continent'] == 'EU']
+    elif selected_region == 'asia':
+        region_concatenated = concatenated[concatenated['Continent'] == 'AS']
+    elif selected_region == 'africa':
+        region_concatenated = concatenated[concatenated['Continent'] == 'AF']
+    elif selected_region == 'north america':
+        region_concatenated = concatenated[concatenated['Continent'] == "NAM"]
+    elif selected_region == 'south america':
+        region_concatenated = concatenated[concatenated['Continent'] == 'SA']
+
+    fig = px.bar(region_concatenated, x='Entity', y=selected_allergens, orientation='v', height=500,
                  labels={'variable': 'Allergen',
                          'Entity': 'Country',
                          },
@@ -233,11 +295,12 @@ def update_plot(selected_allergens):
 @app.callback(
     Output("map_graph", "figure"),
     [Input("allergens", "value"),
+     Input("regions", "value"),
      Input("map_idiom_selector", "value"),
      Input("color_scheme_selector", "value")
      ]
 )
-def update_plot(selected_allergens, map_idiom, color_scheme):
+def update_plot(selected_allergens, selected_region, map_idiom, color_scheme):
     concatenated['selected_set'] = concatenated.apply(lambda row: row[selected_allergens].sum(), axis=1)
     concatenated['most_prevalent_allergen'] = concatenated.apply(
         lambda row: row[selected_allergens][row[selected_allergens] == row[selected_allergens].max()].index[0],
@@ -270,6 +333,7 @@ def update_plot(selected_allergens, map_idiom, color_scheme):
     if map_idiom == 'choropleth':
         fig = px.choropleth(concatenated,
                             locations='Code',
+                            scope=selected_region,
                             color=color,
                             hover_name="Entity",  # column to add to hover information
                             color_continuous_scale=color_continuous_scale,
@@ -279,7 +343,7 @@ def update_plot(selected_allergens, map_idiom, color_scheme):
                                     'least_prevalent_allergen': 'Least Prevalent Allergen',
                                     },
                             title=None,
-                            height=339
+                            height=344
 
                             )
         fig.update_layout(
@@ -296,6 +360,7 @@ def update_plot(selected_allergens, map_idiom, color_scheme):
 
         fig = px.scatter_geo(concatenated,
                              locations='Code',
+                             scope=selected_region,
                              color=color,
                              size='selected_set',
                              hover_name="Entity",  # column to add to hover information
