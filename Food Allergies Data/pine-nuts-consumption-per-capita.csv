@@ -1,0 +1,61 @@
+Entity,Code,Year,PineNutsConsumptionPerCapita(kg/year),EstPineNutsConsumptionPerCapita(kg/year)
+China,CHN,2012,0.003,0.009
+China,CHN,2013,0.002,0.005
+China,CHN,2014,0.006,0.020
+China,CHN,2015,0.001,0.004
+China,CHN,2016,0.003,0.010
+North Korea,PRK,2012,0.079,0.316
+North Korea,PRK,2013,0.049,0.196
+North Korea,PRK,2014,0.056,0.224
+North Korea,PRK,2015,0.092,0.369
+North Korea,PRK,2016,0.152,0.610
+United States,USA,2012,0.012,0.048
+United States,USA,2013,0.010,0.041
+United States,USA,2014,0.011,0.042
+United States,USA,2015,0.012,0.048
+United States,USA,2016,0.011,0.045
+Russia,RUS,2012,0.026,0.260
+Russia,RUS,2013,0.010,0.098
+Russia,RUS,2014,0.018,0.181
+Russia,RUS,2015,0.027,0.273
+Russia,RUS,2016,0.023,0.230
+Germany,DEU,2012,0.030,0.167
+Germany,DEU,2013,0.028,0.154
+Germany,DEU,2014,0.029,0.162
+Germany,DEU,2015,0.065,0.363
+Germany,DEU,2016,0.028,0.156
+Italy,ITA,2012,0.017,0.068
+Italy,ITA,2013,0.036,0.142
+Italy,ITA,2014,0.006,0.025
+Italy,ITA,2015,0.036,0.145
+Italy,ITA,2016,0.037,0.149
+Netherlands,NLD,2012,0.116,0.465
+Netherlands,NLD,2013,-,-
+Netherlands,NLD,2014,0.093,0.373
+Netherlands,NLD,2015,0.082,0.329
+Netherlands,NLD,2016,0.091,0.364
+United Kingdom,GBR,2012,0.008,0.032
+United Kingdom,GBR,2013,0.011,0.046
+United Kingdom,GBR,2014,0.006,0.025
+United Kingdom,GBR,2015,0.007,0.028
+United Kingdom,GBR,2016,0.015,0.061
+Australia,AUS,2012,0.039,0.156
+Australia,AUS,2013,0.028,0.112
+Australia,AUS,2014,0.027,0.107
+Australia,AUS,2015,0.030,0.120
+Australia,AUS,2016,0.037,0.150
+Israel,ISR,2012,0.050,0.200
+Israel,ISR,2013,0.048,0.193
+Israel,ISR,2014,0.047,0.188
+Israel,ISR,2015,0.045,0.178
+Israel,ISR,2016,0.077,0.310
+Spain,ESP,2012,0.012,0.060
+Spain,ESP,2013,0.023,0.114
+Spain,ESP,2014,0.022,0.108
+Spain,ESP,2015,0.009,0.045
+Spain,ESP,2016,0.014,0.068
+Portugal,PRT,2012,0.011,0.022
+Portugal,PRT,2013,0.004,0.009
+Portugal,PRT,2014,0.009,0.018
+Portugal,PRT,2015,0.014,0.027
+Portugal,PRT,2016,0.038,0.076
