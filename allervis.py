@@ -24,18 +24,20 @@ allergen_paths = {
     # nuts:
     'Peanut': f'{data_path}//per-capita-peanut-consumption.csv',
     'Almond': f'{data_path}//almond-consumption-per-capita.csv',
-    'Barley': f'{data_path}//barley-consumption-per-capita.csv',
     'Cashew': f'{data_path}//cashew-consumption-per-capita.csv',
-    'Corn': f'{data_path}//corn-maize-consumption-per-capita.csv',
     'Hazelnut': f'{data_path}//hazelnuts-consumption-per-capita.csv',
     'Macadamia': f'{data_path}//macadamia-consumption-per-capita.csv',
-    'Oat': f'{data_path}//oats-consumption-per-capita.csv',
     'Pecan': f'{data_path}//pecans-consumption-per-capita.csv',
     'Pine': f'{data_path}//pine-nuts-consumption-per-capita.csv',
     'Pistachio': f'{data_path}//pistachios-consumption-per-capita.csv',
+    'Walnut': f'{data_path}//walnuts-consumption-per-capita.csv',
+
+    # cereals:
+    'Barley': f'{data_path}//barley-consumption-per-capita.csv',
+    'Corn': f'{data_path}//corn-maize-consumption-per-capita.csv',
+    'Oat': f'{data_path}//oats-consumption-per-capita.csv',
     'Rice': f'{data_path}//rice-consumption-per-capita.csv',
     'Rye': f'{data_path}//rye-consumption-per-capita.csv',
-    'Walnut': f'{data_path}//walnuts-consumption-per-capita.csv',
     'Wheat': f'{data_path}//wheat-consumption-per-capita.csv',
 
 }
