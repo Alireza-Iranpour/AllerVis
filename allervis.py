@@ -18,7 +18,6 @@ data_path = 'Food Allergies Data'
 allergen_paths = {
     'Beef': f'{data_path}//beef-and-buffalo-meat-consumption-per-person.csv',
     'Seafood': f'{data_path}//fish-and-seafood-consumption-per-capita.csv',
-    'Cereals': f'{data_path}//per-capita-consumption-of-cereals-by-commodity-type-daily-kilocalories.csv',
     'Egg': f'{data_path}//per-capita-egg-consumption-kilograms-per-year.csv',
     'Milk': f'{data_path}//per-capita-milk-consumption.csv',
 
@@ -41,7 +40,7 @@ allergen_paths = {
 
 }
 
-list_of_allergens = list(allergen_paths.keys())
+list_of_allergens = sorted(list(allergen_paths.keys()))
 # ---------------------------------------------------
 preprocess = False
 
