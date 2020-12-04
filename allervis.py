@@ -70,11 +70,15 @@ if preprocess:
     concatenated = pd.concat(all_dfs_most_recent_values.values(), axis=1)
 
     # imputing the missing data with the given strategy
-    imputer = SimpleImputer(missing_values=np.nan, strategy='median')
+    imputer_median = SimpleImputer(missing_values=np.nan, strategy='median')
+    imputer_zero = SimpleImputer(missing_values=np.nan, strategy='constant', fill_value=0)
     scaler = MinMaxScaler()
 
     for column in concatenated.columns:
-        concatenated[column] = imputer.fit_transform(np.array(concatenated[column]).reshape(-1, 1))
+        if column not in nuts:
+            concatenated[column] = imputer_median.fit_transform(np.array(concatenated[column]).reshape(-1, 1))
+        else:
+            concatenated[column] = imputer_zero.fit_transform(np.array(concatenated[column]).reshape(-1, 1))
         concatenated[column] = scaler.fit_transform(np.array(concatenated[column]).reshape(-1, 1))
 
     concatenated = concatenated.reset_index()
