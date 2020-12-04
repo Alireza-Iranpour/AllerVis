@@ -16,7 +16,7 @@ from sklearn.preprocessing import MinMaxScaler
 
 data_path = 'Food Allergies Data'
 allergen_paths = {
-    'Beef and Buffalo': f'{data_path}//beef-and-buffalo-meat-consumption-per-person.csv',
+    'Beef': f'{data_path}//beef-and-buffalo-meat-consumption-per-person.csv',
     'Seafood': f'{data_path}//fish-and-seafood-consumption-per-capita.csv',
     'Egg': f'{data_path}//per-capita-egg-consumption-kilograms-per-year.csv',
     'Milk': f'{data_path}//per-capita-milk-consumption.csv',
