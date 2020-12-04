@@ -21,7 +21,24 @@ allergen_paths = {
     'Cereals': f'{data_path}//per-capita-consumption-of-cereals-by-commodity-type-daily-kilocalories.csv',
     'Egg': f'{data_path}//per-capita-egg-consumption-kilograms-per-year.csv',
     'Milk': f'{data_path}//per-capita-milk-consumption.csv',
-    'Peanut': f'{data_path}//per-capita-peanut-consumption.csv'
+
+    # nuts:
+    'Peanut': f'{data_path}//per-capita-peanut-consumption.csv',
+    'Almond': f'{data_path}//almond-consumption-per-capita.csv',
+    'Barley': f'{data_path}//barley-consumption-per-capita.csv',
+    'Cashew': f'{data_path}//cashew-consumption-per-capita.csv',
+    'Corn': f'{data_path}//corn-maize-consumption-per-capita.csv',
+    'Hazelnut': f'{data_path}//hazelnuts-consumption-per-capita.csv',
+    'Macadamia': f'{data_path}//macadamia-consumption-per-capita.csv',
+    'Oat': f'{data_path}//oats-consumption-per-capita.csv',
+    'Pecan': f'{data_path}//pecans-consumption-per-capita.csv',
+    'Pine': f'{data_path}//pine-nuts-consumption-per-capita.csv',
+    'Pistachio': f'{data_path}//pistachios-consumption-per-capita.csv',
+    'Rice': f'{data_path}//rice-consumption-per-capita.csv',
+    'Rye': f'{data_path}//rye-consumption-per-capita.csv',
+    'Walnut': f'{data_path}//walnuts-consumption-per-capita.csv',
+    'Wheat': f'{data_path}//wheat-consumption-per-capita.csv',
+
 }
 
 list_of_allergens = list(allergen_paths.keys())
@@ -80,28 +97,43 @@ allergen_options = [{"label": str(allergen), "value": str(allergen)} for allerge
 
 app.layout = html.Div([
     html.Div([
+        html.Div([
+            # html.P("AllerVis", className="control_label"),
+            "AllerVis"
+        ],
+            style={'margin': '2px 5px', 'padding': '2px 10px', 'font-size': '25px', 'text-align': 'left',
+                   "font-family": "Helvetica", "font-weight": "bold",
+                   # "background-color": "#f9f9f9",
+                   'background-image': 'linear-gradient(to left, rgba(64, 78, 119,0), rgba(64, 78, 119,5))',
+                   'color': 'white'
+                   }
+        ),
         html.Div(
             [
                 html.Div([
-                    html.P("AllerVis", className="control_label"),
-                ],
-                    style={'margin': '0px, 0px', 'font-size': '25px',
-                           "font-family": "Helvetica", "font-weight": "bold"}
-                ),
-                html.P("Filter by allergen:", className="control_label"),
-                html.Div([
-                    dcc.RadioItems(
-                        id="allergen_selector",
-                        options=[
-                            {"label": "All ", "value": "all"},
-                            {"label": "Customize ", "value": "custom"},
-                        ],
-                        value="all",
-                        labelStyle={"display": "inline-block"},
-                        className="dcc_control",
+                    html.Div([
+                        html.P("Filter by allergen:", className="control_label"),
+                    ],
+                        style={'width': '30%', 'height': '2px', 'display': 'inline-block'}
+                    ),
+
+                    html.Div([
+                        dcc.RadioItems(
+                            id="allergen_selector",
+                            options=[
+                                {"label": "All ", "value": "all"},
+                                {"label": "Customize ", "value": "custom"},
+                            ],
+                            value="all",
+                            labelStyle={"display": "inline-block"},
+                            className="dcc_control",
+                        ),
+                    ],
+                        style={'margin': '5px', 'display': 'inline-block'}
                     ),
                 ],
                     style={'margin': '5px'}),
+
                 dcc.Dropdown(
                     id="allergens",
                     options=allergen_options,
@@ -181,7 +213,7 @@ app.layout = html.Div([
             className="pretty_container four columns",
             id="cross-filter-options",
             style={"width": "38%", "padding": 10, "margin": "5px", "background-color": "#f9f9f9",
-                   'display': 'inline-block', 'vertical-align': 'top', 'height': '1000',
+                   'display': 'inline-block', 'vertical-align': 'top', 'min-height': '355px',
                    'position': 'relative',
                    "box-shadow": "0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 6px 20px 0 rgba(0, 0, 0, 0.05)",
                    "font-family": "Helvetica"},
@@ -189,17 +221,21 @@ app.layout = html.Div([
 
         html.Div(
             [
-                html.Div(
-                    [dcc.Graph(id="map_graph",
-                               config={'modeBarButtonsToRemove': ['select2d', 'lasso2d'],
-                                       'displaylogo': False})],
+                html.Div([
+                    dcc.Graph(id="map_graph",
+                              config={'modeBarButtonsToRemove': ['select2d', 'lasso2d'],
+                                      'displaylogo': False})
+                ],
                     id="map_container",
                     className="pretty_container",
+                    style={'margin-top': '20px'}
                 ),
             ],
             id="map_area",
             className="eight columns",
-            style={"margin": "5px", "width": "58%", 'display': 'inline-block', 'position': 'relative',
+            style={"margin": "5px", "width": "58%", "height": "375px",
+                   'display': 'inline-block', 'position': 'relative',
+                   "background-color": "#ffffff",
                    "box-shadow": "0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 6px 20px 0 rgba(0, 0, 0, 0.05)"}
         ),
 
@@ -225,7 +261,7 @@ app.layout = html.Div([
 
 ],
     id="mainContainer",
-    style={"padding": 10, "background-color": "#f2f2f2"},
+    style={"padding": '10px', "background-color": "#f2f2f2"},
 )
 
 
@@ -254,9 +290,11 @@ def update_plot(selected_allergens, selected_region):
     concatenated.sort_values('selected_set', ascending=ascending, inplace=True)
 
     region_concatenated = concatenated
+    showticklabels = True
 
     if selected_region == 'world':
         region_concatenated = concatenated
+        showticklabels = False
     elif selected_region == 'europe':
         region_concatenated = concatenated[concatenated['Continent'] == 'EU']
     elif selected_region == 'asia':
@@ -270,10 +308,11 @@ def update_plot(selected_allergens, selected_region):
     elif selected_region == 'oceania':
         region_concatenated = concatenated[concatenated['Continent'] == 'OC']
 
-    fig = px.bar(region_concatenated, x='Entity', y=selected_allergens, orientation='v', height=500,
+    fig = px.bar(region_concatenated, x='Entity', y=selected_allergens, orientation='v', height=400,
                  labels={'variable': 'Allergen',
                          'Entity': 'Country',
                          },
+                 # template='plotly_white'
                  )
 
     fig.update_layout(
@@ -290,6 +329,9 @@ def update_plot(selected_allergens, selected_region):
             b=20,
             t=20,
             pad=4
+        ),
+        xaxis=dict(
+            showticklabels=showticklabels
         ),
     )
 
@@ -357,14 +399,14 @@ def update_plot(selected_allergens, selected_region, map_idiom, color_scheme):
                                     'least_prevalent_allergen': 'Least Prevalent Allergen',
                                     },
                             title=None,
-                            height=344
+                            height=340
                             )
         fig.update_layout(
             margin=dict(
                 l=10,
                 r=10,
-                b=20,
-                t=20,
+                b=0,
+                t=0,
                 pad=4
             )
         )
@@ -388,15 +430,15 @@ def update_plot(selected_allergens, selected_region, map_idiom, color_scheme):
                                      'most_prevalent_allergen': 'Most Prevalent Allergen',
                                      'least_prevalent_allergen': 'Least Prevalent Allergen'},
                              title=None,
-                             height=339
+                             height=340
                              )
 
         fig.update_layout(
             margin=dict(
-                l=10,
-                r=10,
-                b=20,
-                t=20,
+                l=5,
+                r=5,
+                b=0,
+                t=0,
                 pad=4
             )
         )
@@ -410,51 +452,6 @@ def update_plot(selected_allergens, selected_region, map_idiom, color_scheme):
 
 
 # ------------------------------------------------------------------------
-
-"""@app.callback(
-    Output("map_graph", "figure"), [Input("allergens", "value"), Input("color_scheme_selector", "value")]
-)
-def update_plot(selected_allergens, color_scheme):
-    concatenated['selected_set'] = concatenated.apply(
-        lambda row: row[selected_allergens].sum(), axis=1)
-    concatenated['most_prevalent_allergen'] = concatenated.apply(
-        lambda row: row[selected_allergens][row[selected_allergens] == row[selected_allergens].max()].index[0], axis=1)
-
-    color_continuous_scale = px.colors.diverging.RdYlGn_r
-    color_continuous_midpoint = concatenated['selected_set'].mean()
-    color = 'selected_set'
-
-    if color_scheme == 'diverging':
-        color_continuous_scale = px.colors.diverging.RdYlGn_r
-        color_continuous_midpoint = concatenated['selected_set'].mean()
-    elif color_scheme == 'sequential':
-        color_continuous_scale = px.colors.sequential.Blues
-    elif color_scheme == 'mpa':
-        color = 'most_prevalent_allergen'
-
-    fig = px.scatter_geo(concatenated,
-                         locations='Code',
-                         color=color,
-                         hover_name="Entity",  # column to add to hover information
-                         color_continuous_scale=color_continuous_scale,
-                         labels={'selected_set': 'Prevalence'},
-                         title=None,
-                         height=300
-
-                         )
-
-    fig.update_layout(
-        margin=dict(
-            l=10,
-            r=10,
-            b=20,
-            t=20,
-            pad=4
-        ),
-    )
-
-    return fig
-"""
 
 # ---------------------------------------------------------------------------------------
 
