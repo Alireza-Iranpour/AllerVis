@@ -42,6 +42,8 @@ allergen_paths = {
 
 }
 
+nuts = ['Peanut', 'Almond', 'Cashew', 'Hazelnut', 'Macadamia', 'Pecan', 'Pine', 'Pistachio', 'Walnut']
+
 list_of_allergens = sorted(list(allergen_paths.keys()))
 # ---------------------------------------------------
 preprocess = False
