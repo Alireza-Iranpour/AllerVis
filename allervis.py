@@ -50,8 +50,6 @@ if preprocess:
         df = pd.read_csv(path)
         allergen_data[allergen] = df
 
-    allergen_data['all_countries'] = pd.read_csv(f'{data_path}//all_country_codes.csv')
-
     # retrieving the most recent year data for each country
     all_dfs_most_recent_values = {}
 
