@@ -288,7 +288,7 @@ def display_status(selector):
         return list_of_allergens
     elif selector == "common":
         return list_of_common_allergens
-    return list_of_common_allergens
+    return []
 
 
 # -------------------------------------------------------------------------------------------
