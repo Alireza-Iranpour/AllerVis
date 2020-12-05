@@ -210,7 +210,6 @@ app.layout = html.Div([
                         id="color_scheme_selector",
                         options=[
                             {"label": "Sequential ", "value": "sequential"},
-                            {"label": "Diverging ", "value": "diverging"},
                             {"label": "Most Prevalent ", "value": "mpa"},
                             {"label": "Least Prevalent ", "value": "lpa"},
                         ],
@@ -376,10 +375,7 @@ def update_plot(selected_allergens, selected_region, map_idiom, color_scheme):
     color_continuous_scale = px.colors.sequential.Blues
     color_continuous_midpoint = concatenated['selected_set'].mean()
 
-    if color_scheme == 'diverging':
-        color_continuous_scale = px.colors.diverging.RdYlGn_r
-        color_continuous_midpoint = concatenated['selected_set'].mean()
-    elif color_scheme == 'sequential':
+    if color_scheme == 'sequential':
         color_continuous_scale = px.colors.sequential.Blues
 
     elif color_scheme == 'mpa':
