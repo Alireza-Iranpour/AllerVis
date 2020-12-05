@@ -45,8 +45,9 @@ allergen_paths = {
 nuts = ['Peanut', 'Almond', 'Cashew', 'Hazelnut', 'Macadamia', 'Pecan', 'Pine', 'Pistachio', 'Walnut']
 
 list_of_allergens = sorted(list(allergen_paths.keys()))
+list_of_common_allergens = sorted(['Milk', 'Egg', 'Seafood', 'Peanut', 'Wheat'])
 # ---------------------------------------------------
-preprocess = True
+preprocess = False
 
 # missing_countries_df = pd.read_csv(f'{data_path}//countries_to_add.csv')
 
@@ -134,9 +135,10 @@ app.layout = html.Div([
                             id="allergen_selector",
                             options=[
                                 {"label": "All ", "value": "all"},
-                                {"label": "Customize ", "value": "custom"},
+                                {"label": "Common ", "value": "common"},
+                                {"label": "Custom ", "value": "custom"},
                             ],
-                            value="all",
+                            value="common",
                             labelStyle={"display": "inline-block"},
                             className="dcc_control",
                         ),
@@ -284,7 +286,9 @@ app.layout = html.Div([
 def display_status(selector):
     if selector == "all":
         return list_of_allergens
-    return []
+    elif selector == "common":
+        return list_of_common_allergens
+    return list_of_common_allergens
 
 
 # -------------------------------------------------------------------------------------------
@@ -418,13 +422,13 @@ def update_plot(selected_allergens, selected_region, map_idiom, color_scheme):
                 t=0,
                 pad=4
             ),
-            geo = dict(
-                landcolor = 'lightgray',
-                showland = True,
-                showcountries = True,
-                countrycolor = 'gray',
-                countrywidth = 0.5,
-                projection = dict(type = 'natural earth')
+            geo=dict(
+                landcolor='lightgray',
+                showland=True,
+                showcountries=True,
+                countrycolor='gray',
+                countrywidth=0.5,
+                projection=dict(type='natural earth')
             )
         )
 
@@ -457,6 +461,14 @@ def update_plot(selected_allergens, selected_region, map_idiom, color_scheme):
                 b=0,
                 t=0,
                 pad=4
+            ),
+            geo=dict(
+                landcolor='lightgray',
+                showland=True,
+                showcountries=True,
+                countrycolor='gray',
+                countrywidth=0.5,
+                projection=dict(type='natural earth')
             )
         )
 
