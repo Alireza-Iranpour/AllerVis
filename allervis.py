@@ -46,7 +46,9 @@ nuts = ['Peanut', 'Almond', 'Cashew', 'Hazelnut', 'Macadamia', 'Pecan', 'Pine', 
 
 list_of_allergens = sorted(list(allergen_paths.keys()))
 # ---------------------------------------------------
-preprocess = False
+preprocess = True
+
+# missing_countries_df = pd.read_csv(f'{data_path}//countries_to_add.csv')
 
 if preprocess:
     allergen_data = {}
@@ -71,15 +73,18 @@ if preprocess:
 
     # imputing the missing data with the given strategy
     imputer_median = SimpleImputer(missing_values=np.nan, strategy='median')
-    imputer_zero = SimpleImputer(missing_values=np.nan, strategy='constant', fill_value=0)
     scaler = MinMaxScaler()
 
     for column in concatenated.columns:
         if column not in nuts:
             concatenated[column] = imputer_median.fit_transform(np.array(concatenated[column]).reshape(-1, 1))
         else:
-            concatenated[column] = imputer_zero.fit_transform(np.array(concatenated[column]).reshape(-1, 1))
-        concatenated[column] = scaler.fit_transform(np.array(concatenated[column]).reshape(-1, 1))
+            min_col = concatenated[column].min()
+            imputer_min = SimpleImputer(missing_values=np.nan, strategy='constant', fill_value=min_col)
+            concatenated[column] = imputer_min.fit_transform(np.array(concatenated[column]).reshape(-1, 1))
+
+        max_col = concatenated[column].max()
+        concatenated[column] /= max_col
 
     concatenated = concatenated.reset_index()
 
@@ -394,7 +399,7 @@ def update_plot(selected_allergens, selected_region, map_idiom, color_scheme):
         scope = selected_region
 
     if map_idiom == 'choropleth':
-        fig = px.choropleth(concatenated,
+        fig = px.choropleth(data_frame=concatenated,
                             locations='Code',
                             scope=scope,
                             color=color,
@@ -406,7 +411,8 @@ def update_plot(selected_allergens, selected_region, map_idiom, color_scheme):
                                     'least_prevalent_allergen': 'Least Prevalent Allergen',
                                     },
                             title=None,
-                            height=340
+                            height=340,
+                            # hover_data=selected_allergens # Removing due to current lag
                             )
         fig.update_layout(
             margin=dict(
@@ -415,6 +421,14 @@ def update_plot(selected_allergens, selected_region, map_idiom, color_scheme):
                 b=0,
                 t=0,
                 pad=4
+            ),
+            geo = dict(
+                landcolor = 'lightgray',
+                showland = True,
+                showcountries = True,
+                countrycolor = 'gray',
+                countrywidth = 0.5,
+                projection = dict(type = 'natural earth')
             )
         )
 
