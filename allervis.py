@@ -213,7 +213,7 @@ app.layout = html.Div([
                             {"label": "Most Prevalent ", "value": "mpa"},
                             {"label": "Least Prevalent ", "value": "lpa"},
                         ],
-                        value="sequential",
+                        value="mpa",
                         labelStyle={"display": "inline-block"},
                         className="dcc_control",
                     ),
