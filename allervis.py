@@ -234,14 +234,20 @@ app.layout = html.Div([
 
         html.Div(
             [
-                html.Div([
-                    dcc.Graph(id="map_graph",
-                              config={'modeBarButtonsToRemove': ['select2d', 'lasso2d'],
-                                      'displaylogo': False})
-                ],
-                    id="map_container",
-                    className="pretty_container",
-                    style={'margin-top': '20px'}
+                dcc.Loading(
+                    id="loading",
+                    children=[
+                        html.Div([
+                            dcc.Graph(id="map_graph",
+                                      config={'modeBarButtonsToRemove': ['select2d', 'lasso2d'],
+                                              'displaylogo': False})
+                        ],
+                            id="map_container",
+                            className="pretty_container",
+                            style={'margin-top': '20px'}
+                        ),
+                    ],
+                    type="circle",
                 ),
             ],
             id="map_area",
@@ -254,12 +260,18 @@ app.layout = html.Div([
 
         html.Div(
             [
-                html.Div(
-                    [dcc.Graph(id="stack_barchart_graph",
-                               config={'modeBarButtonsToRemove': ['lasso2d'],
-                                       'displaylogo': False})],
-                    id="stack_barchart_container",
-                    className="pretty_container",
+                dcc.Loading(
+                    id="loading_2",
+                    children=[
+                        html.Div(
+                            [dcc.Graph(id="stack_barchart_graph",
+                                       config={'modeBarButtonsToRemove': ['lasso2d'],
+                                               'displaylogo': False})],
+                            id="stack_barchart_container",
+                            className="pretty_container",
+                        ),
+                    ],
+                    type="circle",
                 ),
             ],
             id="stack_barchart_area",
