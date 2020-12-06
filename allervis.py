@@ -234,20 +234,14 @@ app.layout = html.Div([
 
         html.Div(
             [
-                dcc.Loading(
-                    id="loading",
-                    children=[
-                        html.Div([
-                            dcc.Graph(id="map_graph",
-                                      config={'modeBarButtonsToRemove': ['select2d', 'lasso2d'],
-                                              'displaylogo': False})
-                        ],
-                            id="map_container",
-                            className="pretty_container",
-                            style={'margin-top': '20px'}
-                        ),
-                    ],
-                    type="default",
+                html.Div([
+                    dcc.Graph(id="map_graph",
+                              config={'modeBarButtonsToRemove': ['select2d', 'lasso2d'],
+                                      'displaylogo': False})
+                ],
+                    id="map_container",
+                    className="pretty_container",
+                    style={'margin-top': '20px'}
                 ),
             ],
             id="map_area",
@@ -260,18 +254,12 @@ app.layout = html.Div([
 
         html.Div(
             [
-                dcc.Loading(
-                    id="loading_2",
-                    children=[
-                        html.Div(
-                            [dcc.Graph(id="stack_barchart_graph",
-                                       config={'modeBarButtonsToRemove': ['lasso2d'],
-                                               'displaylogo': False})],
-                            id="stack_barchart_container",
-                            className="pretty_container",
-                        ),
-                    ],
-                    type="default",
+                html.Div(
+                    [dcc.Graph(id="stack_barchart_graph",
+                               config={'modeBarButtonsToRemove': ['lasso2d'],
+                                       'displaylogo': False})],
+                    id="stack_barchart_container",
+                    className="pretty_container",
                 ),
             ],
             id="stack_barchart_area",
