@@ -247,7 +247,7 @@ app.layout = html.Div([
                             style={'margin-top': '20px'}
                         ),
                     ],
-                    type="circle",
+                    type="default",
                 ),
             ],
             id="map_area",
@@ -271,7 +271,7 @@ app.layout = html.Div([
                             className="pretty_container",
                         ),
                     ],
-                    type="circle",
+                    type="default",
                 ),
             ],
             id="stack_barchart_area",
