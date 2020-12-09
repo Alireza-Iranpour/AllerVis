@@ -1,5 +1,6 @@
 import dash
 import dash_core_components as dcc
+import dash_bootstrap_components as dbc
 import dash_html_components as html
 from dash.dependencies import Input, Output, State, ClientsideFunction
 
@@ -112,7 +113,17 @@ app.layout = html.Div([
     html.Div([
         html.Div([
             # html.P("AllerVis", className="control_label"),
-            "AllerVis"
+            "AllerVis | ",
+            html.Div(
+                dbc.Button(
+                    "Help", id="popover-target"
+                ),
+                style={'display': 'inline-block', 'font-size': '25px',
+                       'margin-bottom': '2px',
+                       "font-family": "Helvetica"
+                       },
+
+            )
         ],
             style={'margin': '2px 5px', 'padding': '2px 10px', 'font-size': '25px', 'text-align': 'left',
                    "font-family": "Helvetica", "font-weight": "bold",
@@ -121,6 +132,30 @@ app.layout = html.Div([
                    'color': 'white'
                    }
         ),
+
+        dbc.Popover(
+            [
+                dbc.PopoverHeader("Instructions:"),
+                dbc.PopoverBody(" - Single click on a legend item to exclude"),
+                dbc.PopoverBody(" - Double click on a legend item to focus"),
+                dbc.PopoverBody(" - Use drag and scroll to change the view of the map"),
+                dbc.PopoverHeader("Information: "),
+                dbc.PopoverBody(" - Choropleth: color encodes aggregated prevalence (saturation)/category "
+                                "of the least or most prevalent allergen (hue)"),
+                dbc.PopoverBody(" - Bubble map: size encodes aggregated prevalence"),
+                dbc.PopoverBody(" - Bubble map: color encodes aggregated prevalence (saturation)/category "
+                                "of the least or most prevalent allergen (hue)"),
+            ],
+            id="popover",
+            is_open=False,
+            target="popover-target",
+            style={"background-color": "rgba(0, 0, 0, 0.8)",
+                   'font-size': '15px', 'color': 'white',
+                   'margin': '5px', 'padding': '0px 5px 5px 5px',
+                   "font-family": "Segoe UI", 'border-radius': '6px'
+                   }
+        ),
+
         html.Div(
             [
                 html.Div([
@@ -134,9 +169,9 @@ app.layout = html.Div([
                         dcc.RadioItems(
                             id="allergen_selector",
                             options=[
-                                {"label": "All ", "value": "all"},
                                 {"label": "Common ", "value": "common"},
                                 {"label": "Custom ", "value": "custom"},
+                                {"label": "All ", "value": "all"},
                             ],
                             value="common",
                             labelStyle={"display": "inline-block"},
@@ -223,7 +258,7 @@ app.layout = html.Div([
                     style={'margin': '5px'}),
 
             ],
-            className="pretty_container four columns",
+            className="pretty_container",
             id="cross-filter-options",
             style={"width": "38%", "padding": 10, "margin": "5px", "background-color": "#f9f9f9",
                    'display': 'inline-block', 'vertical-align': 'top', 'min-height': '355px',
@@ -240,12 +275,12 @@ app.layout = html.Div([
                                       'displaylogo': False})
                 ],
                     id="map_container",
-                    className="pretty_container",
+                    className="map_container",
                     style={'margin-top': '20px'}
                 ),
             ],
             id="map_area",
-            className="eight columns",
+            className="map area",
             style={"margin": "5px", "width": "58%", "height": "375px",
                    'display': 'inline-block', 'position': 'relative',
                    "background-color": "#ffffff",
@@ -263,13 +298,13 @@ app.layout = html.Div([
                 ),
             ],
             id="stack_barchart_area",
-            className="eight columns",
+            className="stack barchart area",
             style={"margin": "5px",
                    "box-shadow": "0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 6px 20px 0 rgba(0, 0, 0, 0.05)",
                    }
         ),
     ],
-        className="row flex-display",
+        className="flex-display",
     ),
 
 ],
@@ -328,6 +363,7 @@ def update_plot(selected_allergens, selected_region):
                          'Entity': 'Country',
                          },
                  # template='plotly_white'
+                 title='Aggregated Prevalence'
                  )
 
     fig.update_layout(
@@ -481,6 +517,16 @@ def update_plot(selected_allergens, selected_region, map_idiom, color_scheme):
 
 
 # ------------------------------------------------------------------------
+
+@app.callback(
+    Output("popover", "is_open"),
+    [Input("popover-target", "n_clicks")],
+    [State("popover", "is_open")],
+)
+def toggle_popover(n, is_open):
+    if n:
+        return not is_open
+    return is_open
 
 # ---------------------------------------------------------------------------------------
 
