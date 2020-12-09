@@ -139,6 +139,7 @@ app.layout = html.Div([
                 dbc.PopoverBody(" - Single click on a legend item to exclude"),
                 dbc.PopoverBody(" - Double click on a legend item to focus"),
                 dbc.PopoverBody(" - Use drag and scroll to change the view of the map"),
+                dbc.PopoverBody(" - Double click anywhere to reset the view"),
                 dbc.PopoverHeader("Information: "),
                 dbc.PopoverBody(" - Choropleth: color encodes aggregated prevalence (saturation)/category "
                                 "of the least or most prevalent allergen (hue)"),
@@ -149,11 +150,13 @@ app.layout = html.Div([
             id="popover",
             is_open=False,
             target="popover-target",
+            placement='bottom-start',
             style={"background-color": "rgba(0, 0, 0, 0.8)",
                    'font-size': '15px', 'color': 'white',
                    'margin': '5px', 'padding': '0px 5px 5px 5px',
                    "font-family": "Segoe UI", 'border-radius': '6px'
                    }
+
         ),
 
         html.Div(
