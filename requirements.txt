@@ -1,6 +1,7 @@
 Brotli==1.0.9
 click==7.1.2
 dash==1.17.0
+dash-bootstrap-components==0.10.7
 dash-core-components==1.13.0
 dash-html-components==1.1.1
 dash-renderer==1.8.3
