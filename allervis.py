@@ -137,7 +137,7 @@ app.layout = html.Div([
             [
                 dbc.PopoverHeader("Instructions:"),
                 dbc.PopoverBody(" - Single click on a legend item to exclude"),
-                dbc.PopoverBody(" - Double click on a legend item to focus"),
+                dbc.PopoverBody(" - Double click on a legend item to isolate"),
                 dbc.PopoverBody(" - Use drag and scroll to change the view of the map"),
                 dbc.PopoverBody(" - Double click anywhere to reset the view"),
                 dbc.PopoverHeader("Information: "),
