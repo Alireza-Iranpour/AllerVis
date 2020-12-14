@@ -17,3 +17,5 @@ All the relevant code for AllerVis is in `allervis.py`. We wrote the entirety of
 The folders `Food and Allergies Data` contains all the data used by AllerVis. The folder `data_cleaning` is not necessary to run the application -- it contains the code we wrote during the data wrangling.
 
 The files `Procfile` and `requirements.txt` contain specifications for our app to run in Heroku.
+
+The `.idea` folder contains automatically generated files for nice usage in PyCharm.
