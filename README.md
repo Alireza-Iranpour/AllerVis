@@ -1,4 +1,5 @@
 # AllerVis
+
 An interactive web application for visualizing consumption of food allergens across the world.
 
 ## Running it locally
