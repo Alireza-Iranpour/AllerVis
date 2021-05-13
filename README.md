@@ -19,3 +19,8 @@ The folders `Food and Allergies Data` contains all the data used by AllerVis. Th
 The files `Procfile` and `requirements.txt` contain specifications for our app to run in Heroku.
 
 The `.idea` folder contains automatically generated files for nice usage in PyCharm.
+
+
+# Dashboard
+
+![image](https://user-images.githubusercontent.com/58800171/118070717-440c8880-b35b-11eb-9692-2ab2d7c2edbf.png)
