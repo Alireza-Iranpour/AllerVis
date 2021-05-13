@@ -1,6 +1,8 @@
 # AllerVis
 
-## Running it locally
+An interactive web application for visualizing consumption of food allergens across the world.
+
+# Running it locally
 
 You can run AllerVis locally using Python3:
 
@@ -10,7 +12,7 @@ python allervis.py
 
 It might be necessary to update libraries/packages.
 
-## Files
+# Files
 
 All the relevant code for AllerVis is in `allervis.py`. We wrote the entirety of this file.
 
